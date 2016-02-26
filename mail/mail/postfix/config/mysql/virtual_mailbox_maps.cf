@@ -1,0 +1,5 @@
+user = vimbadmin
+password = password
+hosts = mysql
+dbname = vimbadmin
+query = SELECT maildir FROM mailbox WHERE username = '%s' AND active = '1'

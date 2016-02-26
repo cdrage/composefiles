@@ -1,0 +1,78 @@
+mail:
+  build: mail
+  env_file:
+    - settings.env
+  links:
+    - mysql
+    - opendkim
+    - spamassassin
+  volumes:
+    - "./data/certs:/etc/certs"
+  volumes_from:
+    - storagebackup
+  ports:
+    - "25:25"
+    - "587:587"
+    - "993:993"
+    - "995:995"
+
+opendkim:
+  build: opendkim
+  env_file:
+    - settings.env
+  expose:
+    - "8891"
+  volumes:
+    - "./data/certs:/etc/certs"
+
+# If you only want the mail server and no webmail/admin simply remove webserver and memcache
+webserver:
+  build: webserver
+  env_file:
+    - settings.env
+  ports:
+    - "80:80"
+  volumes:
+    - "./data/certs:/etc/certs"
+  volumes_from:
+    - storagebackup
+  links:
+    - mysql
+    - memcache
+    - mail
+
+spamassassin:
+  build: spamassassin
+  expose:
+    - "783"
+  volumes_from:
+    - storagebackup
+
+memcache:
+  build: memcache
+  expose:
+    - "11211"
+
+mysql:
+  build: mysql
+  environment:
+    - "MYSQL_ROOT_PASSWORD=password"
+  env_file:
+    - settings.env
+  volumes:
+    - "./data/backup:/backup"
+  #   - "data/mysql:/var/lib/mysql"
+  expose:
+    - "3306"
+
+# Storage container for vmail that also creates daily backups
+storagebackup:
+  build: storagebackup
+  env_file:
+    - settings.env
+  links:
+    - mysql
+  volumes:
+    - "/var/vmail"
+    - "./data/backup:/backup"
+    - "/var/spamassassin"
