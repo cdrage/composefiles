@@ -7,8 +7,8 @@ services:
       - "3000:3000" # Uchiwa
       - "4567:4567" # Sensu API
     volumes:
-      - "./ssl/server/cert.pem:/etc/sensu/ssl/cert.pem"
-      - "./ssl/server/key.pem:/etc/sensu/ssl/key.pem"
+      - "./ssl/server/cert.pem:/etc/sensu/ssl/cert.pem:ro"
+      - "./ssl/server/key.pem:/etc/sensu/ssl/key.pem:ro"
     depends_on:
       - redis
       - rabbitmq
@@ -22,7 +22,7 @@ services:
       - "15672:15672" # Only opened for management
       - "5671:5671" # Opened for Sensu clients
     volumes:
-      - "./config/rabbitmq.config:/etc/rabbitmq/rabbitmq.config"
-      - "./ssl/sensu_ca/cacert.pem:/etc/rabbitmq/ssl/cacert.pem"
-      - "./ssl/server/cert.pem:/etc/rabbitmq/ssl/cert.pem"
-      - "./ssl/server/key.pem:/etc/rabbitmq/ssl/key.pem"
+      - "./config/rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro"
+      - "./ssl/sensu_ca/cacert.pem:/etc/rabbitmq/ssl/cacert.pem:ro"
+      - "./ssl/server/cert.pem:/etc/rabbitmq/ssl/cert.pem:ro"
+      - "./ssl/server/key.pem:/etc/rabbitmq/ssl/key.pem:ro"
