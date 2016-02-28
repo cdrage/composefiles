@@ -1,12 +1,44 @@
-Docker compose files yo.
+docker-compose files
 
-## Mail
+Unless otherwise stated, simple run `docker-compose up` in each folder!
 
-### Introduction
+## Sensu-server
+
+__Introduction__
+
+A scaleable Sensu Server.
+
+
+__Requirements__
+Before deployment, generate the appropriate SSL certs with:
+```sh
+./gen-ssl.sh
+```
+
+This uses docker-compose v2 API which requires `docker 1.10+` and `docker-compose 1.6+`. Sensu server also uses the new libnetwork functionality of Docker.
+
+__Containers__
+sensu:
+  Sensu Server as well as Uchiwa (front-end UI) running with supervisord
+
+redis:
+  Redis database for Sensu
+
+rabbitmq:
+  RabbitMQ database for Sensu
+  15672 port is also opened for rabbitmq management
+  5671 port opened for sensu client connection
+
+__Files__
+In order to deploy sensu-clients, use the /ssl/client certs.
+
+# Mail
+
+__Introduction__
 No more fiddling around with Zimbra. Extremely fast microservices in regards to mail. 
 Original source: https://github.com/frankh/docker-compose-mailbox
 
-### Containers
+__Containers__
 mail:
   postfix - handle's sending and receiving email
   dovecot - sorts incoming mail into IMAP mailboxes
@@ -27,9 +59,7 @@ mysql:
 storagebackup:
   cron jobs for backup + list of volumes for backing up
 
-### Setup
-
-Email settings:
+__Email settings__
 
 SMTP:
 mail.domain.com
@@ -46,6 +76,7 @@ mail.domain.com
 993
 SSL
 
-### Records
+__Records__
 
 Create the appropriate A records / mx / txt for this.
+
