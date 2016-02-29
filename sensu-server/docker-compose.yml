@@ -3,15 +3,23 @@ version: '2'
 services:
   sensu:
     build: ./sensu
-    ports:
-      - "3000:3000" # Uchiwa
-      - "4567:4567" # Sensu API
     volumes:
+      - "./config/sensu.json:/etc/sensu/config.json:ro"
+      - "./config/sensu-checks.json:/etc/sensu/conf.d/checks.json:ro"
       - "./ssl/server/cert.pem:/etc/sensu/ssl/cert.pem:ro"
       - "./ssl/server/key.pem:/etc/sensu/ssl/key.pem:ro"
     depends_on:
-      - redis
       - rabbitmq
+      - redis
+
+  uchiwa:
+    image: uchiwa/uchiwa
+    ports:
+      - "3000:3000"
+    volumes:
+      - "./config/uchiwa.json:/config/config.json:ro"
+    depends_on:
+      - sensu
 
   redis:
     image: redis
@@ -19,7 +27,7 @@ services:
   rabbitmq:
     image: rabbitmq:3-management
     ports:
-      - "15672:15672" # Only opened for management
+      - "15672:15672" # Optional, only opened for rabbitmq management
       - "5671:5671" # Opened for Sensu clients
     volumes:
       - "./config/rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro"

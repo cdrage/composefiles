@@ -19,18 +19,27 @@ This uses docker-compose v2 API which requires `docker 1.10+` and `docker-compos
 
 __Containers__
 sensu:
-  Sensu Server as well as Uchiwa (front-end UI) running with supervisord
+  Sensu Server && Sensu API (for Uchiwa)
 
 redis:
   Redis database for Sensu
 
 rabbitmq:
-  RabbitMQ database for Sensu
-  15672 port is also opened for rabbitmq management
-  5671 port opened for sensu client connection
+  RabbitMQ database for Sensu Server && Clients
+
+uchiwa:
+  Front-end UI for Sensu
+
+__Opened host ports__
+  3000: Uchiwa UI
+  15672: RabbitMQ management UI
+  5671: RabbitMQ communication port
 
 __Files__
 In order to deploy sensu-clients, use the /ssl/client certs.
+
+feel free to edit `sensu-checks.json` and `sensu.json` to your liking.
+
 
 # Mail
 

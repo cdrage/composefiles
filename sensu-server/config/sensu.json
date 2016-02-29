@@ -19,18 +19,13 @@
     "bind": "0.0.0.0",
     "port": 4567
   },
-  "ponymailer": {
-    "authenticate":true,
-    "username":"example@gmail.com",
-    "tls":true,
-    "port":"587",
-    "fromname":"Network",
-    "hostname":"smtp.gmail.com",
-    "password":"password",
-    "from":"network@gmail.com",
-    "recipients":[ 
-      "noc@gmail.com"
-      ]
+  "mailer": {
+    "admin_gui": "http://admin.example.com:8080/",
+    "mail_from": "sensu@example.com",
+    "mail_to": "monitor@example.com",
+    "smtp_address": "smtp.example.org",
+    "smtp_port": "25",
+    "smtp_domain": "example.org"
   },
   "graphite": {
     "server":"graphite.mydomain.com",
@@ -50,15 +45,18 @@
     },
     "mailer": {
       "type": "pipe",
-      "command": "/opt/sensu/embedded/bin/ruby /etc/sensu/handlers/ponymailer.rb"
+      "command": "/opt/sensu/embedded/bin/ruby /etc/sensu/handlers/mailer.rb"
     },
     "slack": {
       "type": "pipe",
       "command": "/opt/sensu/embedded/bin/ruby /etc/sensu/handlers/slack.rb"
     },
-    "graphite": {
-      "type": "pipe",
-      "command": "/opt/sensu/embedded/bin/ruby /etc/sensu/handlers/graphite-tcp.rb"
+    "graphite_line_tcp": {
+      "type": "tcp",
+      "socket": {
+        "host": "domain.com",
+        "port": 2003
+      }
     }
   }
 }
