@@ -33,7 +33,6 @@ RUN mkdir -p /etc/sensu/handlers \
     && wget -o /etc/sensu/handlers/slack.rb https://raw.githubusercontent.com/sensu-plugins/sensu-plugins-slack/master/bin/handler-slack.rb \
     && chmod +x /etc/sensu/handlers/slack.rb
 
-
 #! Add supervisord
 ADD ./supervisord.conf /etc/supervisord.conf
 

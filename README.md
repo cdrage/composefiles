@@ -2,14 +2,15 @@ docker-compose files
 
 Unless otherwise stated, simple run `docker-compose up` in each folder!
 
-## Sensu-server
+## Sensu Server
 
-__Introduction__
+#### Introduction
 
 A scaleable Sensu Server.
 
 
-__Requirements__
+#### Requirements
+
 Before deployment, generate the appropriate SSL certs with:
 ```sh
 ./gen-ssl.sh
@@ -17,58 +18,56 @@ Before deployment, generate the appropriate SSL certs with:
 
 This uses docker-compose v2 API which requires `docker 1.10+` and `docker-compose 1.6+`. Sensu server also uses the new libnetwork functionality of Docker.
 
-__Containers__
-sensu:
-  Sensu Server && Sensu API (for Uchiwa)
+#### Containers
 
-redis:
-  Redis database for Sensu
+__sensu:__ Sensu Server && Sensu API (for Uchiwa)
 
-rabbitmq:
-  RabbitMQ database for Sensu Server && Clients
+__redis:__ Redis database for Sensu
 
-uchiwa:
-  Front-end UI for Sensu
+__rabbitmq:__ RabbitMQ database for Sensu Server && Clients
 
-__Opened host ports__
-  3000: Uchiwa UI
-  15672: RabbitMQ management UI
-  5671: RabbitMQ communication port
+__uchiwa:__ Front-end UI for Sensu
 
-__Files__
+#### Opened ports
+
+__3000:__ Uchiwa UI
+
+__15672:__ RabbitMQ management UI
+
+__5671:__ RabbitMQ communication port
+
+#### Files
+
 In order to deploy sensu-clients, use the /ssl/client certs.
 
 feel free to edit `sensu-checks.json` and `sensu.json` to your liking.
 
 
-# Mail
+## Mail
 
-__Introduction__
+#### Introduction
+
 No more fiddling around with Zimbra. Extremely fast microservices in regards to mail. 
 Original source: https://github.com/frankh/docker-compose-mailbox
 
-__Containers__
-mail:
-  postfix - handle's sending and receiving email
-  dovecot - sorts incoming mail into IMAP mailboxes
+#### Containers:
+__mail:__
+  - postfix - handle's sending and receiving email
+  - dovecot - sorts incoming mail into IMAP mailboxes
 
-webserver:
-  vimbadmin - web interface for creating/managing mailboxes
-  roundcube - web interface for checking a mailbox
+__webserver:__
+  - vimbadmin - web interface for creating/managing mailboxes
+  - roundcube - web interface for checking a mailbox
 
-opendkim:
-  Adds domainkey validation so that sent mails aren't flagged as spam
+__opendkim:__ Adds domainkey validation so that sent mails aren't flagged as spam
 
-spamassassin:
-  Automatically filters spam for inboxes - learns based on what users mark as spam/not spam
+__spamassassin:__ Automatically filters spam for inboxes - learns based on what users mark as spam/not spam
 
-mysql:
-  database for mail and webserver
+__mysql:__ database for mail and webserver
 
-storagebackup:
-  cron jobs for backup + list of volumes for backing up
+__storagebackup:__ cron jobs for backup + list of volumes for backing up
 
-__Email settings__
+#### Mail settings
 
 SMTP:
 mail.domain.com
@@ -85,7 +84,7 @@ mail.domain.com
 993
 SSL
 
-__Records__
+#### Records
 
 Create the appropriate A records / mx / txt for this.
 
