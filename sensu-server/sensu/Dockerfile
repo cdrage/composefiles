@@ -27,10 +27,10 @@ RUN wget -q http://repositories.sensuapp.org/apt/pubkey.gpg -O- | sudo apt-key a
 RUN mkdir -p /etc/sensu/handlers \
     && gem install sensu-plugin \
     && gem install sensu-plugins-mailer \
-    && wget -o /etc/sensu/handlers/mailer.rb https://raw.githubusercontent.com/sensu-plugins/sensu-plugins-mailer/master/bin/handler-mailer.rb \
+    && wget -O /etc/sensu/handlers/mailer.rb https://raw.githubusercontent.com/sensu-plugins/sensu-plugins-mailer/master/bin/handler-mailer.rb \
     && chmod +x /etc/sensu/handlers/mailer.rb \
     && gem install sensu-plugins-slack \
-    && wget -o /etc/sensu/handlers/slack.rb https://raw.githubusercontent.com/sensu-plugins/sensu-plugins-slack/master/bin/handler-slack.rb \
+    && wget -O /etc/sensu/handlers/slack.rb https://raw.githubusercontent.com/sensu-plugins/sensu-plugins-slack/master/bin/handler-slack.rb \
     && chmod +x /etc/sensu/handlers/slack.rb
 
 #! Add supervisord
