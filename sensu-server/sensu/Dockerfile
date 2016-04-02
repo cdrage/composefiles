@@ -25,11 +25,10 @@ RUN wget -q http://repositories.sensuapp.org/apt/pubkey.gpg -O- | sudo apt-key a
 
 #! Install all handlers
 RUN mkdir -p /etc/sensu/handlers \
-    && gem install sensu-plugin \
-    && gem install sensu-plugins-mailer \
+    && gem install sensu-plugin sensu-handler \
+    && gem install mail erubis \
     && wget -O /etc/sensu/handlers/mailer.rb https://raw.githubusercontent.com/sensu-plugins/sensu-plugins-mailer/master/bin/handler-mailer.rb \
     && chmod +x /etc/sensu/handlers/mailer.rb \
-    && gem install sensu-plugins-slack \
     && wget -O /etc/sensu/handlers/slack.rb https://raw.githubusercontent.com/sensu-plugins/sensu-plugins-slack/master/bin/handler-slack.rb \
     && chmod +x /etc/sensu/handlers/slack.rb
 
