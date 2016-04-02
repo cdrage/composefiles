@@ -5,7 +5,8 @@ services:
     build: ./sensu
     volumes:
       - "./config/sensu.json:/etc/sensu/config.json:ro"
-      - "./config/sensu-checks.json:/etc/sensu/conf.d/checks.json:ro"
+      - "./config/checks.json:/etc/sensu/conf.d/checks.json:ro"
+      - "./config/handlers.json:/etc/sensu/conf.d/handlers.json:ro"
       - "./ssl/server/cert.pem:/etc/sensu/ssl/cert.pem:ro"
       - "./ssl/server/key.pem:/etc/sensu/ssl/key.pem:ro"
     depends_on:

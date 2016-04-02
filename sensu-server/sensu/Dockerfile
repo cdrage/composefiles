@@ -32,6 +32,9 @@ RUN mkdir -p /etc/sensu/handlers \
     && wget -O /etc/sensu/handlers/slack.rb https://raw.githubusercontent.com/sensu-plugins/sensu-plugins-slack/master/bin/handler-slack.rb \
     && chmod +x /etc/sensu/handlers/slack.rb
 
+# Add graphite tcp ruby file to handlers
+ADD ./graphite-tcp.rb /etc/sensu/handlers/graphite-tcp.rb
+
 #! Add supervisord
 ADD ./supervisord.conf /etc/supervisord.conf
 
