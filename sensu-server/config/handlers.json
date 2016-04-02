@@ -12,12 +12,9 @@
       "type": "pipe",
       "command": "/opt/sensu/embedded/bin/ruby /etc/sensu/handlers/slack.rb"
     },
-    "graphite_line_tcp": {
-      "type": "tcp",
-      "socket": {
-        "host": "domain.com",
-        "port": 2003
-      }
+    "graphite": {
+      "type": "pipe",
+      "command": "/opt/sensu/embedded/bin/ruby /etc/sensu/handlers/graphite-tcp.rb"
     }
   }
 }
