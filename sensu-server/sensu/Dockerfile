@@ -23,17 +23,15 @@ RUN wget -q http://repositories.sensuapp.org/apt/pubkey.gpg -O- | sudo apt-key a
     && apt-get install -y sensu
 
 
-#! Install all handlers
+#! Install handler dependencies (mailer + slack)
 RUN mkdir -p /etc/sensu/handlers \
-    && gem install sensu-plugin \
-    && gem install mail erubis \
-    && wget -O /etc/sensu/handlers/mailer.rb https://raw.githubusercontent.com/sensu-plugins/sensu-plugins-mailer/master/bin/handler-mailer.rb \
-    && chmod +x /etc/sensu/handlers/mailer.rb \
-    && wget -O /etc/sensu/handlers/slack.rb https://raw.githubusercontent.com/sensu-plugins/sensu-plugins-slack/master/bin/handler-slack.rb \
-    && chmod +x /etc/sensu/handlers/slack.rb
+    && /opt/sensu/embedded/bin/gem install sensu-plugin \
+    && /opt/sensu/embedded/bin/gem install mail erubis
 
-# Add graphite tcp ruby file to handlers
+#! Add graphite tcp ruby file to handlers
 ADD ./graphite-tcp.rb /etc/sensu/handlers/graphite-tcp.rb
+ADD ./mailer.rb /etc/sensu/handlers/mailer.rb
+ADD ./slack.rb /etc/sensu/handlers/slack.rb
 
 #! Add supervisord
 ADD ./supervisord.conf /etc/supervisord.conf

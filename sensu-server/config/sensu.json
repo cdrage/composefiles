@@ -25,7 +25,11 @@
     "mail_to": "monitor@example.com",
     "smtp_address": "smtp.example.org",
     "smtp_port": "25",
-    "smtp_domain": "example.org"
+    "smtp_domain": "example.org",
+    "smtp_username": "sensu@example.com",
+    "smtp_password": "password",
+    "smtp_authentication": "plain",
+    "smtp_enable_starttls_auto": "false"
   },
   "graphite": {
     "server":"graphite.mydomain.com",
