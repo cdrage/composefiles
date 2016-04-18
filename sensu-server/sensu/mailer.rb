@@ -149,22 +149,14 @@ class Mailer < Sensu::Handler
                else
                  <<-BODY.gsub(/^\s+/, '')
         <%= output %>
-        Admin GUI: <%= admin_gui %>
-        <br>
-        Host: <%= @event['client']['name'] %>
-        <br>
-        Timestamp: <%= Time.at(@event['check']['issued']) %>
-        <br>
-        Address:  <%= @event['client']['address'] %>
-        <br>
-        Check Name:  <%= @event['check']['name'] %>
-        <br>
-        Command:  <%= command %>
-        <br>
-        Status:  <%= status_to_string %>
-        <br>
-        Occurrences:  <%= @event['occurrences'] %>
-        <br>
+        Admin GUI: <%= admin_gui %>\n
+        Host: <%= @event['client']['name'] %>\n
+        Timestamp: <%= Time.at(@event['check']['issued']) %>\n
+        Address:  <%= @event['client']['address'] %>\n
+        Check Name:  <%= @event['check']['name'] %>\n
+        Command:  <%= command %>\n
+        Status:  <%= status_to_string %>\n
+        Occurrences:  <%= @event['occurrences'] %>\n
         <%= playbook %>
       BODY
                end
