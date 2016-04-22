@@ -7,11 +7,17 @@ services:
       - "53:53"
       - "53:53/udp"
       - "8080:80"
+      - "8001:8001"
     environment:
       PDNS_ALLOW_AXFR_IPS: 127.0.0.1
       PDNS_DISTRIBUTOR_THREADS: 3
       PDNS_CACHE_TTL: 20
       PDNS_RECURSIVE_CACHE_TTL: 10
+      PDNS_RECURSIVE_CACHE_TTL: 10
+      PDNS_API: 'yes'
+      PDNS_API_KEY: 'changeme'
+      PDNS_WEB_SERVER: 'yes'
+      PDNS_WEB_PASSWORD: changeme
       MYSQL_ROOT_PASSWORD: password
       MYSQL_HOST: mysql
     depends_on:

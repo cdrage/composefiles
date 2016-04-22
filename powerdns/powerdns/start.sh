@@ -9,14 +9,25 @@ PDNS_SLAVE=${PDNS_SLAVE:-no}
 PDNS_CACHE_TTL=${PDNS_CACHE_TTL:-20}
 PDNS_DISTRIBUTOR_THREADS=${PDNS_DISTRIBUTOR_THREADS:-3}
 PDNS_RECURSIVE_CACHE_TTL=${PDNS_RECURSIVE_CACHE_TTL:-10}
+
+# API
+PDNS_API=${PDNS_API:-no}
+PDNS_API_KEY=${PDNS_API_KEY:-changeme}
+PDNS_WEB_SERVER=${PDNS_WEB_SERVER:-no}
+PDNS_WEB_PASSWORD=${PDNS_WEB_PASSWORD:-password}
+PDNS_WEB_PORT=${PDNS_WEB_PORT:-80}
+
+
 POWERADMIN_HOSTMASTER=${POWERADMIN_HOSTMASTER:-}
 POWERADMIN_NS1=${POWERADMIN_NS1:-}
 POWERADMIN_NS2=${POWERADMIN_NS2:-}
 
 until nc -z ${MYSQL_HOST} 3306; do
-    echo "$(date) - waiting for mysql..."
+    echo "Waiting for database to start up.."
     sleep 1
 done
+
+echo "Database has started!"
 
 if mysql -u root -p${MYSQL_PASSWORD} --host=${MYSQL_HOST} "${MYSQL_DB}" >/dev/null 2>&1 </dev/null
 then
@@ -39,6 +50,13 @@ sed -i "s/{{PDNS_SLAVE}}/${PDNS_SLAVE}/" /etc/powerdns/pdns.conf
 sed -i "s/{{PDNS_CACHE_TTL}}/${PDNS_CACHE_TTL}/" /etc/powerdns/pdns.conf
 sed -i "s/{{PDNS_DISTRIBUTOR_THREADS}}/${PDNS_DISTRIBUTOR_THREADS}/" /etc/powerdns/pdns.conf
 sed -i "s/{{PDNS_RECURSIVE_CACHE_TTL}}/${PDNS_RECURSIVE_CACHE_TTL}/" /etc/powerdns/pdns.conf
+
+### PDNS API
+sed -i "s/{{PDNS_API}}/${PDNS_API}/" /etc/powerdns/pdns.conf
+sed -i "s/{{PDNS_API_KEY}}/${PDNS_API_KEY}/" /etc/powerdns/pdns.conf
+sed -i "s/{{PDNS_WEB_SERVER}}/${PDNS_WEB_SERVER}/" /etc/powerdns/pdns.conf
+sed -i "s/{{PDNS_WEB_PASSWORD}}/${PDNS_WEB_PASSWORD}/" /etc/powerdns/pdns.conf
+sed -i "s/{{PDNS_WEB_PORT}}/${PDNS_WEB_PORT}/" /etc/powerdns/pdns.conf
 
 ### POWERADMIN
 sed -i "s/{{MYSQL_HOST}}/${MYSQL_HOST}/" /var/www/html/inc/config.inc.php
