@@ -22,6 +22,7 @@ services:
       MYSQL_HOST: mysql
     depends_on:
       - mysql
+    restart: always
 
   # Also mounts a volume for persistent storage / back-up
   mysql:
@@ -30,3 +31,4 @@ services:
       - "/var/lib/mysql:/var/lib/mysql"
     environment:
       MYSQL_ROOT_PASSWORD: password
+    restart: always
