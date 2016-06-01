@@ -23,7 +23,10 @@ services:
     depends_on:
       - mysql
 
+  # Also mounts a volume for persistent storage / back-up
   mysql:
     image: mysql
+    volumes:
+      - "/var/lib/mysql:/var/lib/mysql"
     environment:
       MYSQL_ROOT_PASSWORD: password
