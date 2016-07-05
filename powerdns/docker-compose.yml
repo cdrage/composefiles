@@ -2,7 +2,7 @@ version: '2'
 
 services:
   powerdns:
-    build: ./powerdns
+    build: cdrage/powerdns
     ports:
       - "53:53"
       - "53:53/udp"

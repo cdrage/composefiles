@@ -60,3 +60,37 @@ These options can be set for the powerdns image:
   - POWERADMIN_HOSTMASTER
   - POWERADMIN_NS1
   - POWERADMIN_NS2
+
+
+## CouchPotato
+
+Disclaimer: I'm not responsible for whatever you do with these Docker images. Use at your own risk.
+
+This is a docker-compose file of couchpotato, transmission as well as plex.
+
+#### Configuration
+
+Your files will be located under ./media folder in the current directory.
+Same with the plex configuration data.
+
+The files used for persistent storage upon container re-creation are as follows:
+```sh
+./media # media storage
+./plex_config # config data
+./couchpotato_config # config data
+```
+
+There's a few steps before you're 100% ready to-go.
+
+  1. `mkdir data plex_config couchpotato_config`
+  2. `chown 797:797 -R data plex_config couchpotato_config`
+  3. `docker-compose up`
+  4. Go to Couch Potato (http://localhost:5050)
+  5. While going through the setup, set your downloader to Transmission with the credentials:
+    http://transmission:9091
+    admin
+    admin
+  6. Run through the rest of the Couch Potato setup
+  7. Go to Plex (http://localhost:32400/web)
+  8. Sign in, add your account. When adding media, simply add the /media folder from the root directory.
+  9. (optional) remove `network_mode: host` from the docker-compose file and rebuild your cluster `docker-compose down && docker-compose up`
