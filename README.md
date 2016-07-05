@@ -15,26 +15,35 @@ Before deployment, generate the appropriate SSL certs with:
 ./gen-ssl.sh
 ```
 
+These certs will be located within the SSL folder of the working directory.
+
 #### Files
 
 In order to deploy sensu-clients, use the /ssl/client certs.
 
-feel free to edit `sensu-checks.json` and `sensu.json` to your liking.
+Feel free to edit `sensu-checks.json` and `sensu.json` to your liking. This including setting your slack server as well as any email notifications.
 
 ## PowerDNS
 
-PowerDNS server and poweradmin interface
+PowerDNS server with the poweradmin interface
 
-[original source](https://github.com/obi12341/docker-pdns)
+#### Credentials
 
-Default credentials:
-  - POWERDNS on :8080: admin/admin
-  - PDNS on 8001: admin/changeme
-  - PDNS API on 8001: changeme
+POWERDNS on 8080: 
+  - admin/admin
+  - This is changed after initial login
+
+PDNS on 8001:
+  - admin/changeme
+  - This can be changed through the environment variables
+
+PDNS API on 8001:
+  - changeme
+  - This can be changed through the environment variables
 
 #### Configuration
 
-These options can be set:
+These options can be set for the powerdns image:
 
   - PDNS_ALLOW_AXFR_IPS
   - PDNS_MASTER
