@@ -82,8 +82,8 @@ The files used for persistent storage upon container re-creation are as follows:
 
 There's a few steps before you're 100% ready to-go.
 
-  1. `mkdir data plex_config couchpotato_config`
-  2. `chown 797:797 -R data plex_config couchpotato_config`
+  1. `mkdir media plex_config couchpotato_config`
+  2. `chown 797:797 -R media plex_config couchpotato_config`
   3. `docker-compose up`
   4. Go to Couch Potato (http://localhost:5050)
   5. While going through the setup, set your downloader to Transmission with the credentials:
