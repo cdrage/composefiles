@@ -79,18 +79,21 @@ The files used for persistent storage upon container re-creation are as follows:
 ./plex_config # config data
 ./couchpotato_config # config data
 ```
+The instructions below will show how to create these persistent configuration folders.
 
 There's a few steps before you're 100% ready to-go.
 
-  1. `mkdir media plex_config couchpotato_config && chown 797:797 -R media plex_config couchpotato_config`
-  2. run `docker run --rm -it wernight/plex-media-server retrieve-plex-token` to find your Plex Token. Plug it into the `docker-compose.yaml` file
-  3. `docker-compose up`
-  4. Go to Couch Potato (http://localhost:5050)
-  5. While going through the setup, set your downloader to Transmission with the credentials:
+```
+mkdir media plex_config couchpotato_config
+chown 797:797 -R media plex_config couchpotato_config
+```
+  1. run `docker run --rm -it wernight/plex-media-server retrieve-plex-token` to find your Plex Token. Plug it into the `docker-compose.yaml` file where KEYHERE is located.
+  2. `docker-compose up`
+  3. Go to Couch Potato (http://localhost:5050)
+  4. While going through the setup, set your downloader to Transmission with the credentials:
     http://transmission:9091
     admin
     admin
-  6. Run through the rest of the Couch Potato setup
-  7. Go to Plex (http://localhost:32400/web)
-  8. Sign in, add your account. When adding media, simply add the /media folder from the root directory.
-  9. (optional) remove `network_mode: host` from the docker-compose file and rebuild your cluster `docker-compose down && docker-compose up`
+  5. Run through the rest of the Couch Potato setup
+  6. Go to Plex (http://localhost:32400/web)
+  7. Sign in, add your server (should automatically appear as you added the Plex Token). When adding media, simply add the /media folder from the root directory of the server.
