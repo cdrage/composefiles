@@ -45,6 +45,6 @@ services:
       - ./plex_config:/config
       - ./media:/media
     environment:
-      - X_PLEX_TOKEN=foobar
+      - X_PLEX_TOKEN=KEYHERE
     network_mode: host
     restart: always
