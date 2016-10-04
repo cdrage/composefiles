@@ -5,7 +5,7 @@
       "host": "sensu",
       "port": 4567,
       "ssl": false,
-      "insecure": false,
+      "insecure": true,
       "user": "",
       "pass": "",
       "path": "",

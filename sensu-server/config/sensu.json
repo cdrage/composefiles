@@ -1,6 +1,6 @@
 {
   "rabbitmq": {
-    "host": "vpdevrqpr1",
+    "host": "172.28.1.41",
     "port": 5672,
     "vhost": "/sensu",
     "user": "sensu",
@@ -32,9 +32,9 @@
     "port":"2003"
   },
   "slack": {
-    "token": "mytoken",
-    "team_name": "myteam",
-    "channel": "#general",
+    "token": "xoxp-87107920405-87098420740-87107141252-b11146532885cb67de45565aa2ec6ece",
+    "team_name": "vp-sensu",
+    "channel": "#sensu",
     "bot_name": "sensu",
     "message_prefix": "@channel"
   }
