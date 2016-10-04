@@ -1,14 +1,10 @@
 {
   "rabbitmq": {
-    "host": "rabbitmq",
-    "port": 5671,
+    "host": "vpdevrqpr1",
+    "port": 5672,
     "vhost": "/sensu",
     "user": "sensu",
-    "password": "sensu",
-    "ssl": {
-      "cert_chain_file": "/etc/sensu/ssl/cert.pem",
-      "private_key_file": "/etc/sensu/ssl/key.pem"
-    }
+    "password": "sensu"
   },
   "redis": {
     "host": "redis",
