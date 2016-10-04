@@ -13,7 +13,7 @@ ENV DEBIAN_FRONTEND="noninteractive"
 #! System preparation
 RUN apt-get update \
     && apt-get upgrade -y \
-    && apt-get install -y sudo wget git wget ruby ruby-dev openssl supervisor build-essential \
+    && apt-get install -y sudo wget git wget ruby ruby-dev supervisor build-essential \
     && mkdir -p /var/log/supervisor
 
 #! Sensu server
