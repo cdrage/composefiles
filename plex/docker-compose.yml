@@ -28,12 +28,13 @@ services:
       - "8989:8989"
     volumes:
       - ./config/sonarr:/config
+      - ./media/tv:/media
       - /dev/rtc:/dev/rtc:ro
     depends_on:
       - transmission
     environment:
       - PUID=1000
-      - GUID=1000
+      - PGID=999
     restart: always
   
   radarr:
@@ -42,10 +43,11 @@ services:
       - "7878:7878"
     volumes:
       - ./config/radarr:/config
+      - ./media/movies:/media
       - /dev/rtc:/dev/rtc:ro
     environment:
       - PUID=1000
-      - GUID=1000
+      - PGID=999
     depends_on:
       - transmission
     restart: always
