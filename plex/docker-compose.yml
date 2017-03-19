@@ -8,6 +8,7 @@ services:
       - ./media:/var/lib/transmission-daemon/downloads
     ports:
       - "9091:9091"
+    user: docker
     environment:
       - TRUSER=admin
       - TRPASSWD=admin
@@ -20,9 +21,6 @@ services:
       - /dev/rtc:/dev/rtc:ro
     ports:
       - "9117:9117"
-    environment:
-      - UID=1000
-      - PGID=1000
     restart: always
 
   sonarr:
@@ -32,9 +30,7 @@ services:
     volumes:
       - ./config/sonarr:/config
       - /dev/rtc:/dev/rtc:ro
-    environment:
-      - UID=1000
-      - PGID=1000
+    user: docker
     depends_on:
       - transmission
     restart: always
@@ -46,9 +42,7 @@ services:
     volumes:
       - ./config/radarr:/config
       - /dev/rtc:/dev/rtc:ro
-    environment:
-      - UID=1000
-      - PGID=1000
+    user: docker
     depends_on:
       - transmission
     restart: always
@@ -77,7 +71,6 @@ services:
       - ./media:/media
     environment:
       - X_PLEX_TOKEN=KEYHERE
-      - UID=1000
-      - PGID=1000
     network_mode: host
+    user: docker
     restart: always
