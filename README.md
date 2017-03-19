@@ -62,11 +62,11 @@ These options can be set for the powerdns image:
   - POWERADMIN_NS2
 
 
-## CouchPotato
+## Plex (Sonarr + Radarr + Transmission + Plex)
 
 Disclaimer: I'm not responsible for whatever you do with these Docker images. Use at your own risk.
 
-This is a docker-compose file of couchpotato, transmission as well as plex.
+This is a docker-compose file of plex, sonarr, radarr and transmission.
 
 #### Configuration
 
@@ -76,16 +76,17 @@ Same with the plex configuration data.
 The files used for persistent storage upon container re-creation are as follows:
 ```sh
 ./media # media storage
-./plex_config # config data
-./couchpotato_config # config data
+./config/plex # config data
+./config/sonarr
+./config/radarr
 ```
 The instructions below will show how to create these persistent configuration folders.
 
 There's a few steps before you're 100% ready to-go.
 
 ```
-mkdir media plex_config couchpotato_config
-chown 797:797 -R media plex_config couchpotato_config
+mkdir media config
+chown 797:797 -R media config
 ```
   1. run `docker run --rm -it wernight/plex-media-server retrieve-plex-token` to find your Plex Token. Plug it into the `docker-compose.yaml` file where KEYHERE is located.
   2. `docker-compose up`

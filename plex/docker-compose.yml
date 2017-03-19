@@ -1,6 +1,7 @@
 version: '2'
 
 services:
+
   transmission:
     image: cdrage/transmission
     volumes:
@@ -12,18 +13,28 @@ services:
       - TRPASSWD=admin
     restart: always
 
-  couchpotato:
-    image: cdrage/couchpotato
-    volumes:
-      - ./couchpotato_config:/root/.couchpotato
+  sonarr:
+    image: linuxserver/sonarr
     ports:
-      - "5050:5050"
+      - "8989:8989"
+    volumes:
+      - ./config/sonarr:/config
+      - /dev/rtc:/dev/rtc:ro
     depends_on:
       - transmission
-    restart: always
+  
+  radarr:
+    image: linuxserver/radarr
+    ports:
+      - "7878:7878"
+    volumes:
+      - ./config/radarr:/config
+      - /dev/rtc:/dev/rtc:ro
+    depends_on:
+      - transmission
 
   plex:
-    image: wernight/plex-media-server:latest
+    image: wernight/plex-media-server
     ports:
       # for access to the Plex Media Server [required]
       - "32400:32400"
@@ -42,7 +53,7 @@ services:
       - "32413:32413/udp"
       - "32414:32414/udp"
     volumes:
-      - ./plex_config:/config
+      - ./config/plex:/config
       - ./media:/media
     environment:
       - X_PLEX_TOKEN=KEYHERE
