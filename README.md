@@ -86,7 +86,7 @@ There's a few steps before you're 100% ready to-go.
 
 ```
 mkdir media config
-chown 797:797 -R media config
+chown docker:docker -R media config
 ```
   1. run `docker run --rm -it wernight/plex-media-server retrieve-plex-token` to find your Plex Token. Plug it into the `docker-compose.yaml` file where KEYHERE is located.
   2. `docker-compose up`

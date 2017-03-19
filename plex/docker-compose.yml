@@ -13,6 +13,15 @@ services:
       - TRPASSWD=admin
     restart: always
 
+  jackett:
+    image: linuxserver/jackett
+    volumes:
+      - ./config/jackett:/config
+      - /dev/rtc:/dev/rtc:ro
+    ports:
+      - "9117:9117"
+    restart: always
+
   sonarr:
     image: linuxserver/sonarr
     ports:
@@ -22,6 +31,7 @@ services:
       - /dev/rtc:/dev/rtc:ro
     depends_on:
       - transmission
+    restart: always
   
   radarr:
     image: linuxserver/radarr
@@ -32,6 +42,7 @@ services:
       - /dev/rtc:/dev/rtc:ro
     depends_on:
       - transmission
+    restart: always
 
   plex:
     image: wernight/plex-media-server
