@@ -77,3 +77,4 @@ services:
     environment:
       - X_PLEX_TOKEN=KEYHERE
     restart: always
+    network_mode: host
