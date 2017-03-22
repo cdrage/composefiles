@@ -76,5 +76,4 @@ services:
       - ./media:/media
     environment:
       - X_PLEX_TOKEN=KEYHERE
-    network_mode: host
     restart: always

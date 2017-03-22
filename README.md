@@ -62,7 +62,7 @@ These options can be set for the powerdns image:
   - POWERADMIN_NS2
 
 
-## Plex (Sonarr + Radarr + Transmission + Plex)
+## Media Center (Sonarr + Radarr + Transmission + Plex)
 
 Disclaimer: I'm not responsible for whatever you do with these Docker images. Use at your own risk.
 
@@ -87,14 +87,12 @@ There's a few steps before you're 100% ready to-go.
 ```
 mkdir media config
 chown docker:docker -R media config
+chmod 777 -R media config # yolo
 ```
+
   1. run `docker run --rm -it wernight/plex-media-server retrieve-plex-token` to find your Plex Token. Plug it into the `docker-compose.yaml` file where KEYHERE is located.
   2. `docker-compose up`
-  3. Go to Couch Potato (http://localhost:5050)
-  4. While going through the setup, set your downloader to Transmission with the credentials:
-    http://transmission:9091
-    admin
-    admin
-  5. Run through the rest of the Couch Potato setup
-  6. Go to Plex (http://localhost:32400/web)
-  7. Sign in, add your server (should automatically appear as you added the Plex Token). When adding media, simply add the /media folder from the root directory of the server.
+  3. Go to Sonarr and set everything up (http://localhost:8989).
+  4. Go to Radarr and set everything up (http://localhost:7878).
+  5. Go to Plex (http://localhost:32400/web)
+  6. Sign in, add your server (should automatically appear as you added the Plex Token). When adding media, simply add the /media folder from the root directory of the server, both /tv and /movies.
