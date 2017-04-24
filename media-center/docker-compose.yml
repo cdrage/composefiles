@@ -2,15 +2,30 @@ version: '2'
 
 services:
 
-  transmission:
+  transmission-movies:
     image: cdrage/transmission
     volumes:
-      - ./media:/var/lib/transmission-daemon/downloads
+      - ./media/movies:/var/lib/transmission-daemon/downloads
     ports:
       - "9091:9091"
     environment:
       - TRUSER=admin
       - TRPASSWD=admin
+      - USERID=1000
+      - GROUPID=999
+    restart: always
+
+  transmission-tv:
+    image: cdrage/transmission
+    volumes:
+      - ./media/tv:/var/lib/transmission-daemon/downloads
+    ports:
+      - "9092:9091"
+    environment:
+      - TRUSER=admin
+      - TRPASSWD=admin
+      - USERID=1000
+      - GROUPID=999
     restart: always
 
   jackett:
@@ -28,10 +43,11 @@ services:
       - "8989:8989"
     volumes:
       - ./config/sonarr:/config
-      - ./media/tv:/media
+      - ./media/tv:/var/lib/transmission-daemon/downloads
       - /dev/rtc:/dev/rtc:ro
     depends_on:
-      - transmission
+      - transmission-tv
+      - jackett
     environment:
       - PUID=1000
       - PGID=999
@@ -43,13 +59,14 @@ services:
       - "7878:7878"
     volumes:
       - ./config/radarr:/config
-      - ./media/movies:/media
+      - ./media/movies:/var/lib/transmission-daemon/downloads
       - /dev/rtc:/dev/rtc:ro
     environment:
       - PUID=1000
       - PGID=999
     depends_on:
-      - transmission
+      - transmission-movies
+      - jackett
     restart: always
 
   plex:

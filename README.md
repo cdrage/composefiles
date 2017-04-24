@@ -70,6 +70,10 @@ This is a docker-compose file of plex, sonarr, radarr and transmission.
 
 #### Configuration
 
+Notes for configuring:
+use /var/lib/transmission-daemon/downloads for the dir in sonarr and radarr (prob with radarr not detecting that something is "downloaded")
+DONT RENAME (bug in radarr not renaming movies and removing the older folder)
+
 Your files will be located under ./media folder in the current directory.
 Same with the plex configuration data.
 
