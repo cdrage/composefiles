@@ -1,23 +1,43 @@
 # Docker Compose Files
 
-Unless otherwise stated, simple run `docker-compose up` in each folder!
+```
+                  ##         .
+            ## ## ##        ==
+         ## ## ## ## ##    ===
+     /"""""""""""""""""\___/ ===
+~~~ {~~ ~~~~ ~~~ ~~~~ ~~~ ~ /  ===- ~~~
+     \______ o           __/
+       \    \         __/
+        \____\_______/
+```
 
-All compose files use `version: '2'` of the API, so this requires: `docker 1.10+` and `docker-compose 1.6+`.
+A collection of Docker Compose files I use. Read below for a description of each container.
+
+Unless otherwise stated, simply run:
+
+```sh
+docker-compose up
+```
+
+All compose files use: `version: '2'` of the API, so this requires: `docker 1.10+` and `docker-compose 1.6+`.
 
 ## Sensu Server
 
+**Description:**
+
 Monitoring server
 
-#### Configuration
+**Configuration:**
 
 Before deployment, generate the appropriate SSL certs with:
+
 ```sh
 ./gen-ssl.sh
 ```
 
 These certs will be located within the SSL folder of the working directory.
 
-#### Files
+**Files:**
 
 In order to deploy sensu-clients, use the /ssl/client certs.
 
@@ -25,9 +45,11 @@ Feel free to edit `sensu-checks.json` and `sensu.json` to your liking. This incl
 
 ## PowerDNS
 
+**Description:**
+
 PowerDNS server with the poweradmin interface
 
-#### Credentials
+**Credentials:**
 
 POWERDNS on 8080: 
   - admin/admin
@@ -41,10 +63,11 @@ PDNS API on 8001:
   - changeme
   - This can be changed through the environment variables
 
-#### Configuration
+**Configuration:**
 
 These options can be set for the powerdns image:
 
+```sh
   - PDNS_ALLOW_AXFR_IPS
   - PDNS_MASTER
   - PDNS_SLAVE
@@ -60,6 +83,7 @@ These options can be set for the powerdns image:
   - POWERADMIN_HOSTMASTER
   - POWERADMIN_NS1
   - POWERADMIN_NS2
+```
 
 
 ## Media Center (Sonarr + Radarr + Transmission + Plex)
@@ -68,11 +92,12 @@ Disclaimer: I'm not responsible for whatever you do with these Docker images. Us
 
 This is a docker-compose file of plex, sonarr, radarr and transmission.
 
-#### Configuration
+**Configuration:**
 
 Notes for configuring:
-use /var/lib/transmission-daemon/downloads for the dir in sonarr and radarr (prob with radarr not detecting that something is "downloaded")
-DONT RENAME (bug in radarr not renaming movies and removing the older folder)
+
+  - Use /var/lib/transmission-daemon/downloads for the dir in sonarr and radarr (prob with radarr not detecting that something is "downloaded")
+  - DONT RENAME (bug in radarr not renaming movies and removing the older folder)
 
 Your files will be located under ./media folder in the current directory.
 Same with the plex configuration data.
@@ -94,7 +119,9 @@ chown docker:docker -R media config
 chmod 777 -R media config # yolo
 ```
 
-  1. run `docker run --rm -it wernight/plex-media-server retrieve-plex-token` to find your Plex Token. Plug it into the `docker-compose.yaml` file where KEYHERE is located.
+**Setup:**
+
+  1. Run `docker run --rm -it wernight/plex-media-server retrieve-plex-token` to find your Plex Token. Plug it into the `docker-compose.yaml` file where KEYHERE is located.
   2. `docker-compose up`
   3. Go to Sonarr and set everything up (http://localhost:8989).
   4. Go to Radarr and set everything up (http://localhost:7878).
