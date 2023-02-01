@@ -1,9 +1,12 @@
 version: '2'
+
 services:
+
   mariadb:
     image: bitnami/mariadb:latest
     volumes:
       - /home/core/data/mariadb:/bitnami/mariadb
+
   wordpress:
     image: bitnami/wordpress:latest
     depends_on:
